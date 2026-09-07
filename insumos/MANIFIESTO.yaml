@@ -1,0 +1,127 @@
+# Manifiesto derivado del codigo.
+#
+# Este repositorio tiene siete archivos y ninguno es codigo fuente: el
+# programa viaja compilado dentro de index.html. Por eso el manifiesto es
+# corto y lo interesante esta al final, en los hallazgos.
+#
+# No hay base de datos, ni endpoints propios, ni variables de entorno, ni
+# archivos de datos. No se detecto ningun patron de dato personal en las
+# siete rutas.
+
+archivos:
+  - ruta: index.html
+    sha256: "[PENDIENTE] sin calcular"
+    origen: "[PENDIENTE] es la salida de un compilador; el proyecto que lo genera no esta en este repositorio y nadie declara donde vive"
+    contiene_pii: "no. Medido: cero coincidencias de patron RUT y cero de patron correo"
+    puede_versionarse: true
+    uso: "[INFERIDO] la aplicacion entera, compilada y minificada en 279 KB. Es lo que GitHub Pages publica [.github/workflows/deploy-pages.yml]. Contiene la version de produccion de React, la llamada al servicio de pronostico api.open-meteo.com y los enlaces a las ocho fuentes externas. Editarlo a mano no es viable: es salida de compilador"
+
+  - ruta: bmi-prototipo_1.html
+    sha256: "[PENDIENTE] sin calcular"
+    origen: "[PENDIENTE] quien lo entrego y cuando"
+    contiene_pii: "no. Medido: cero coincidencias de ambos patrones"
+    puede_versionarse: true
+    uso: "ninguno propio. Es un DUPLICADO EXACTO de [index.html], comprobado por identificador de contenido y no por parecido: mismo blob, 273 KB repetidos. Su nombre sugiere una version anterior, pero su contenido es identico al publicado, asi que no conserva ninguna iteracion. Retirarlo o no lo decide una persona"
+
+  - ruta: .github/workflows/deploy-pages.yml
+    sha256: "[PENDIENTE] sin calcular"
+    origen: "[PENDIENTE] quien lo entrego y cuando"
+    contiene_pii: "no"
+    puede_versionarse: true
+    uso: "[INFERIDO] el despliegue REAL, y el unico de los tres archivos de despliegue que se ejecuta. Publica la RAIZ COMPLETA del repositorio en GitHub Pages en cada push a la rama principal, o a mano. Que publique la raiz entera es lo que hace que los archivos sobrantes tambien queden accesibles"
+
+  - ruta: deploy-pages.yml
+    sha256: "[PENDIENTE] sin calcular"
+    origen: "[PENDIENTE] quien lo entrego y cuando"
+    contiene_pii: "no"
+    puede_versionarse: true
+    uso: "ninguno. Es un archivo de workflow en la RAIZ del repositorio, y GitHub solo ejecuta los que estan bajo .github/workflows/, asi que no corre nunca. Ademas es un duplicado exacto de la copia guardada bajo la carpeta 'Claude outputs' (mismo blob), y AMBOS difieren del que si se ejecuta. Tres archivos de despliegue distintos, uno activo: quien venga despues no sabra cual editar"
+
+  - ruta: README.md
+    sha256: "[PENDIENTE] sin calcular"
+    origen: "[INFERIDO] generado al crear el repositorio; 59 bytes"
+    contiene_pii: "no"
+    puede_versionarse: true
+    uso: "[PENDIENTE] hoy solo lleva el nombre del repositorio y la frase 'Laboratorio de meteorologia'. No describe que es el sistema, quien lo mantiene ni como se usa. El repositorio es publico y este es el unico texto que encuentra quien llega"
+
+  - ruta: .gitattributes
+    sha256: "[PENDIENTE] sin calcular"
+    origen: "[INFERIDO] lo instala Sud-Austral/coipo_aireadme; es el mismo archivo en los repositorios del alcance"
+    contiene_pii: "no"
+    puede_versionarse: true
+    uso: "[INFERIDO] normaliza los finales de linea entre Windows y Linux"
+
+# La septima ruta, 'Claude outputs/deploy-pages.yml', no se declara con cita
+# porque su nombre lleva un espacio y no admite el formato [archivo:linea] de
+# estos documentos. Es el duplicado exacto de la copia de la raiz, descrito
+# arriba.
+
+# ---------------------------------------------------------------------------
+# HALLAZGOS
+# ---------------------------------------------------------------------------
+#
+# 1. NO HAY CODIGO FUENTE, y es lo mas urgente.
+#
+#    Las siete rutas no incluyen ningun archivo editable, ningun manifiesto de
+#    dependencias y ninguna configuracion de compilacion. [index.html] es
+#    salida de un compilador: contiene React de produccion, minificado.
+#
+#    Consecuencia practica: este repositorio permite PUBLICAR la aplicacion,
+#    no MODIFICARLA. Para cambiar una linea del boletin hace falta el proyecto
+#    original, que no esta aqui y que nadie nombra. Mientras eso no se
+#    resuelva, el sistema depende de una carpeta en la maquina de alguien.
+#
+#    [PENDIENTE] donde vive el proyecto que genera index.html.
+#
+# 2. CUATRO DE SIETE ARCHIVOS SON DUPLICADOS EXACTOS.
+#
+#    Dos pares, comprobados por identificador de contenido:
+#      bmi-prototipo_1.html  ==  index.html            (273 KB repetidos)
+#      deploy-pages.yml      ==  Claude outputs/deploy-pages.yml
+#
+#    Y ninguno de esos dos ultimos es el que se ejecuta.
+#
+#    Importa mas de lo normal porque el despliegue publica la RAIZ ENTERA
+#    [.github/workflows/deploy-pages.yml]: los sobrantes tambien quedan
+#    descargables desde el sitio. No hay secretos en ellos, asi que no es una
+#    fuga; es superficie publicada sin querer, mas la ambiguedad de tener tres
+#    archivos de despliegue y uno solo activo.
+#
+#    Esto es una DETECCION, no una conclusion. Que sobra lo decide una
+#    persona. El generador automatico lo propondra en delete_files.md; ni ese
+#    archivo ni este borran nada.
+#
+# 3. SIN LICENCIA, SIENDO PUBLICO.
+#
+#    Ninguna de las siete rutas es un archivo de licencia. Ademas, la
+#    aplicacion consume ocho fuentes externas, algunas de organismos publicos
+#    y otras de servicios privados, cada una con sus propias condiciones de
+#    uso y de redistribucion. Eso no lo resuelve el codigo.
+#
+# 4. NINGUN DATO PERSONAL.
+#
+#    Medido sobre las siete rutas: cero coincidencias de patron RUT y cero de
+#    patron correo. El sistema no guarda nada: consulta fuentes en vivo y no
+#    tiene almacenamiento propio.
+
+pendientes:
+  - "Donde vive el codigo fuente que genera [index.html]: autor del repositorio. Es la pregunta mas urgente"
+  - "Quien pidio el boletin y para que decision se usa: Unidad de Informacion y Analisis de CONAF"
+  - "Que se considera un incidente y quien lo declara: Unidad de Informacion y Analisis"
+  - "A quien se le envia por WhatsApp y con que frecuencia: quien opera el boletin"
+  - "Que falta para que deje de ser el prototipo MVP que el propio archivo declara: autor del repositorio"
+  - "Cual de los tres archivos de despliegue se conserva: autor del repositorio"
+  - "Si [bmi-prototipo_1.html] tenia que ser una version distinta y se copio por error: autor del repositorio"
+  - "Origen de todos los archivos: el repositorio no registra quien entrego que ni cuando"
+
+verificar:
+  - "Condiciones de uso y de redistribucion de las ocho fuentes externas que la aplicacion consulta o incrusta: Fiscalia"
+  - "Licencia de un repositorio publico de un organismo del Estado que no declara ninguna: Fiscalia"
+  - "Si un prototipo declarado MVP puede usarse como insumo de una decision operativa en un incidente: Unidad de Informacion y Analisis"
+
+ciego:
+  - "Que muestra el boletin. Es lo mas importante del sistema y esta minificado dentro de [index.html]: el analizador lee las direcciones que consulta, no la logica que las usa. Que variables presenta, con que umbrales y para que ventana de tiempo, queda fuera de este manifiesto"
+  - "Como se elige la ubicacion del incidente"
+  - "Que calcula con la respuesta del servicio de pronostico"
+  - "El texto del mensaje que se comparte por WhatsApp"
+  - "Si el prototipo se probo con alguien: no hay evidencia de uso ni de validacion en el repositorio"
