@@ -1,0 +1,38 @@
+# .gitignore
+
+# Este repositorio no tenia ninguno. Hoy solo contiene la aplicacion ya
+# compilada (index.html); cuando entre el codigo fuente que la genera, estas
+# reglas evitan versionar node_modules/ y la carpeta de compilacion, que es
+# el error mas caro y mas comun en los repositorios de la familia.
+#
+# Un .gitignore NO des-versiona lo que git ya sigue.
+
+# --- Artefactos del generador automatico de README ---
+README_CANDIDATE.md
+readme_context/
+
+# --- Secretos y configuracion local ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- Node y frontend, para cuando entre el codigo fuente ---
+node_modules/
+dist/
+build/
+.vite/
+.cache/
+coverage/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Sistema operativo y editores ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
